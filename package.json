@@ -1,0 +1,30 @@
+{
+  "name": "full-stack-blog-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhanya0412/Full-Stack-Blog-Platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhanya0412/Full-Stack-Blog-Platform/issues"
+  },
+  "homepage": "https://github.com/dhanya0412/Full-Stack-Blog-Platform#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.16.4",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}

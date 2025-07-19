@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="/">MyBlog</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/register" class="register-link">Register</a>
+    </div>
+  </nav>
+  <main>
+    <h2>Register</h2>
+    <% if (typeof error !== 'undefined') { %>
+      <p style="color: red;"><%= error %></p>
+    <% } %>
+    <form action="/register" method="POST" class="form-box">
+      <label>Username:</label><br>
+      <input name="username" required><br><br>
+      <label>Password:</label><br>
+      <input type="password" name="password" required><br><br>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </main>
+</body>
+</html>
