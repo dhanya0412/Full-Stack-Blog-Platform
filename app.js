@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const initializePassport = require('./config/passport');
+const blogRoutes = require('./routes/blog');
 const port = 3000;
 
 mongoose.connect('mongodb://localhost:27017/blog-app', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 
 const authRoutes = require('./routes/auth');
 app.use(authRoutes);
+app.use("/blog", blogRoutes)
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

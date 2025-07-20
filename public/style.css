@@ -20,7 +20,7 @@ body {
   overflow-x: hidden;
 }
 
-.navbar {
+#header .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;

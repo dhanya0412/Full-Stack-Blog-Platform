@@ -29,7 +29,7 @@ router.get('/login', (req, res) => {
 
 // Handle login
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/blog',
   failureRedirect: '/login',
   failureFlash: true // If using connect-flash
 }));
