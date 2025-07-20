@@ -9,6 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
+    <style>
+        .blog-toggle {
+            display: none;
+        }
+
+        .blog-toggle.active {
+            display: flex;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -19,28 +29,25 @@
             </div>
 
             <div class="navbar-right">
+                <a onclick="showActiveClass('allBlogs')" class="register-link">ALL BLOGS</a>
+                <a onclick="showActiveClass('myBlogs')" class="register-link">MY BLOG</a>
                 <a href="/blog/addBlog" class="register-link">ADD BLOG</a>
-
-
-
             </div>
         </nav>
         <h1 class="mt-3 mb-3">
             Hi <%= user.username%>!
         </h1>
 
-        <div class='container mt-3 d-flex flex-wrap gap-3'>
-            <% blogs.forEach(blog=>{%>
+        <div id="myBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3'>
+            <% myblogs.forEach(blog=>{%>
                 <div class="card" style="width: 18rem;">
                     <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">
                             <%=blog.title%>
                         </h5>
-                        <p class="card-text">
-                            <%=blog.body%>
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                        <a href="/blog/<%=blog._id%>" class="btn btn-primary">VIEW</a>
                     </div>
                 </div>
 
@@ -49,6 +56,41 @@
 
 
         </div>
+
+        <div id="allBlogs" class='container d-none mt-3 d-flex flex-wrap gap-3'>
+            <% allblogs.forEach(blog=>{%>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=blog.title%>
+                        </h5>
+
+                        <a href="/blog/<%=blog._id%>" class="btn btn-primary">VIEW </a>
+                    </div>
+                </div>
+
+                <%} )%>
+
+
+
+        </div>
+
+        <script>
+            function showActiveClass(id) {
+                document.querySelectorAll('.container').forEach(section => {
+
+                    if (section.classList.contains('d-flex')) {
+                        section.classList.remove('d-flex');
+                        section.classList.add('d-none');
+
+                    }
+
+                })
+                document.getElementById(id).classList.remove("d-none");
+                document.getElementById(id).classList.add("d-flex");
+            }
+        </script>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
