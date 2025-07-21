@@ -38,8 +38,8 @@
             Hi <%= user.username%>!
         </h1>
 
-        <div id="myBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3'>
-            <% myblogs.forEach(blog=>{%>
+        <div id="allBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3'>
+            <% allblogs.forEach(blog=>{%>
                 <div class="card" style="width: 18rem;">
                     <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -57,24 +57,22 @@
 
         </div>
 
-        <div id="allBlogs" class='container d-none mt-3 d-flex flex-wrap gap-3'>
-            <% allblogs.forEach(blog=>{%>
-                <div class="card" style="width: 18rem;">
-                    <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%=blog.title%>
-                        </h5>
-
-                        <a href="/blog/<%=blog._id%>" class="btn btn-primary">VIEW </a>
-                    </div>
-                </div>
-
-                <%} )%>
-
-
-
-        </div>
+      <div id="myBlogs" class='container d-none mt-3 d-flex flex-wrap gap-3'>
+  <% myblogs.forEach(blog => { %>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= blog.coverImage %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= blog.title %>
+        </h5>
+        <a href="/blog/<%= blog._id %>" class="btn btn-primary">VIEW</a>
+        <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
 
         <script>
             function showActiveClass(id) {

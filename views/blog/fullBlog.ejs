@@ -20,20 +20,95 @@
 </head>
 
 <body>
+    <div id="navbar">
+        <nav class="navbar">
+      <div class="navbar-left">
+        <a href="/">MyBlog</a>
+      </div>
+      <div class="navbar-right">
+     <a href="/blog" class="register-link">ALL BLOGS</a>
+
+
+      </div>
+    </nav>
+    </div>
     <div class="container-fluid">
         <h1>
             <%=blog.title%>
         </h1>
         <img src="<%=blog.image%>">
-        <pre><%=blog.body%></pre>
+
 
         <h2>Blog by-<%= userName%>
         </h2>
+       
+        <p>
+            <%= blog.body %>
+        </p>
+
+        <h2>Comments</h2>
+<ul>
+  <% blog.comments.forEach(comment => { %>
+    <li>
+      <strong><%= comment.user.username %>:</strong>
+      <span id="content-<%= comment._id %>"><%= comment.content %></span>
+      <small>(<%= comment.datePosted.toDateString() %>)</small>
+
+      <% if (user && comment.user._id.toString() === user._id.toString()) { %>
+
+        <button onclick="toggleEdit('<%= comment._id %>')">Edit</button>
+        <form action="/blog/<%= blog._id %>/comments/<%= comment._id %>/delete" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+
+        <form id="edit-form-<%= comment._id %>" action="/blog/<%= blog._id %>/comments/<%= comment._id %>" method="POST" style="display:none;">
+          <textarea name="content" required><%= comment.content %></textarea>
+          <button type="submit">Update</button>
+          <button type="button" onclick="cancelEdit('<%= comment._id %>')">Cancel</button>
+        </form>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>
+
+<% if (user) { %>
+  <form action="/blog/<%= blog._id %>/comments" method="POST">
+    <textarea name="content" placeholder="Write a comment..." required></textarea>
+    <button type="submit">Add Comment</button>
+  </form>
+<% } else { %>
+  <p><a href="/login">Login</a> to comment.</p>
+<% } %>
 
     </div>
+    <% if (user && blog.createdBy.toString() === user._id.toString()) { %>
+  <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-danger">Delete Blog</button>
+  </form>
+<% } %>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+        <script>
+  function toggleEdit(commentId) {
+    const form = document.getElementById(`edit-form-${commentId}`);
+    const content = document.getElementById(`content-${commentId}`);
+    
+    form.style.display = 'block';
+    content.style.display = 'none';
+  }
+
+  function cancelEdit(commentId) {
+    const form = document.getElementById(`edit-form-${commentId}`);
+    const content = document.getElementById(`content-${commentId}`);
+    
+    form.style.display = 'none';
+    content.style.display = 'inline';
+  }
+</script>
+
 </body>
 
 </html>

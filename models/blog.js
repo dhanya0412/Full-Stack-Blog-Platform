@@ -11,17 +11,23 @@ const blogSchema = mongoose.Schema(
         },
         body: {
             type: String,
-            require: true,
+            required: true,
 
         },
         coverImageUrl: {
             type: String,
-            require: false,
+            required: false,
         },
         createdBy: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
-        }
+        },
+        comments: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Comment'
+            }
+        ]
 
     }, { timestamps: true });
 

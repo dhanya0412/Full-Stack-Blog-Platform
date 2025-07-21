@@ -20,7 +20,8 @@ body {
   overflow-x: hidden;
 }
 
-#header .navbar {
+
+ .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,16 +38,16 @@ body {
   font-weight: bold;
 }
 
-.navbar-right .register-link {
+.navbar-right .register-link, .navbar-right .login-link {
   color: #171B36;
   text-decoration: none;
   padding: 0.5rem 1rem;
-
+  cursor: pointer;
   background: #F4F5FA;
   transition: background 0.2s;
 }
 
-.navbar-right .register-link:hover {
+.navbar-right .register-link:hover, .navbar-right .login-link:hover {
   background: #474C6B;
   color: #F4F5FA;
 }
@@ -280,7 +281,6 @@ button a:hover {
 
 }
 
-/*---------REGISTER 'N' LOGIN------------*/
 
 .information {
   gap: 20px;

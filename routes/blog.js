@@ -5,7 +5,6 @@ const router = express.Router();
 const isLoggedIn = require('../middlewares/isLoggedIn.js');
 
 router.get('/', async (req, res) => {
-
     const myBlogs = await Blog.find({ createdBy: req.user._id }).sort({ "createdAt": -1 });
     const allBlogs = await Blog.find({}).sort({ "createdAt": -1 });
     res.render('blog/index.ejs',
@@ -27,8 +26,12 @@ router.get('/addBlog', (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    const blog = await Blog.findById(id);
+    const { id } = req.params;  
+    const blog = await Blog.findById(req.params.id)
+      .populate({
+        path: 'comments',
+        populate: { path: 'user', select: 'username' }
+      });
     const userId = blog.createdBy;
     const blogUser = await User.findById(userId);
     const userName = blogUser.username;

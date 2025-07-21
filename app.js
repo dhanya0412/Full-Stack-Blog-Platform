@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const initializePassport = require('./config/passport');
 const blogRoutes = require('./routes/blog');
+const commentRoutes = require('./routes/comments');
 const port = 3000;
 require('dotenv').config();
 
@@ -32,9 +33,14 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
+
 const authRoutes = require('./routes/auth');
 app.use(authRoutes);
 app.use("/blog", blogRoutes)
+app.use('/blog', commentRoutes); 
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

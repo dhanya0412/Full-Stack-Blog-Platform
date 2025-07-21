@@ -19,13 +19,15 @@
             </div>
 
             <div class="navbar-right">
-                <h1>
-                    Hi <%= user.username%>!
-                </h1>
+              
+                <a href="/blog" class="register-link">ALL BLOGS</a>
 
             </div>
         </nav>
         <div class="container mt-3">
+            <h1 class="mt-3 mb-3">
+            Hi <%= user.username%>! Go on write it all down!
+        </h1>
             <form action="/blog" method="POST">
                 <div class="mb-3">
                     <div class="mb-3">
