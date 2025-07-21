@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0C0E1B;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            height: 10%;
+        }
+
+        .userList {
+            display: flex;
+            justify-content: space-between;
+            height: 20%;
+            margin: 5%;
+
+        }
+
+        .userInfo {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/">MyBlog</a>
+        </div>
+        <div class="navbar-right">
+
+            <a href="/auth/logout" class="login-link">LOGOUT</a>
+        </div>
+    </nav>
+    <div class="" style="height:100%">
+
+        <% allUsers.forEach(user=>{ %>
+            <div class="border userList p-3">
+                <div>
+                    <h2>username: <%= user.username%>
+
+                    </h2>
+                </div>
+                <div>
+                    <div class="userInfo ">
+                        <h2>Role:
+                            <% if(user.isAdmin){%>
+                                admin
+
+                                <%} else{%>
+                                    user
+
+                                    <%}%>
+
+
+                        </h2>
+                    </div>
+                    <div>
+                        <a href="/admin/viewBlogs/<%=user._id%>" class=" m-2 btn btn-info">View
+                            Blogs</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <%})%>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const isAdmin = require('../middlewares/isAdmin');
 
 
 router.get('/register', (req, res) => {
@@ -27,17 +28,28 @@ router.get('/login', (req, res) => {
 });
 
 
+
+
+
+
+
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/blog',
+
   failureRedirect: '/login',
   failureFlash: true // If using connect-flash
-}));
+}), (req, res) => {
+  if (req.user.isAdmin) {
+    return res.redirect('/admin/dashboard');
+  } else {
+    return res.redirect('/blog')
+  }
+});
 
 
 router.get('/logout', (req, res, next) => {
-  req.logout(function(err) {
+  req.logout(function (err) {
     if (err) { return next(err); }
-    res.redirect('/auth/login'); 
+    res.redirect('/auth/login');
   });
 });
 

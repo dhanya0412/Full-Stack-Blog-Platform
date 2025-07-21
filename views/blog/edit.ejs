@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0C0E1B;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            height: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/">MyBlog</a>
+        </div>
+
+        <div class="navbar-right">
+            <a onclick="showActiveClass('allBlogs')" class="register-link">ALL BLOGS</a>
+            <a onclick="showActiveClass('myBlogs')" class="register-link">MY BLOG</a>
+            <a href="/blog/addBlog" class="register-link">ADD BLOG</a>
+        </div>
+    </nav>
+
+
+    <form action="/blog/<%=blog._id%>?_method=PATCH" method="POST">
+        <div class="form-floating">
+            <textarea class="form-control mt-3" name="newBody" id="newBody"
+                style="height: 100vh; width: 80%; margin-left:10%; margin-right:10%"><%= blog.body%></textarea>
+            <label for="newBody"></label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" style="margin-left:10%; margin-right:10%">Submit</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

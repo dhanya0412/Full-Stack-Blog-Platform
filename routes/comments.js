@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Comment = require('../models/comment');
 const Blog = require('../models/blog');
-const isLoggedIn  = require('../middlewares/isLoggedIn');
+const isLoggedIn = require('../middlewares/isLoggedIn');
 
 router.post('/:blogId/comments', isLoggedIn, async (req, res) => {
   try {
@@ -21,12 +21,12 @@ router.post('/:blogId/comments', isLoggedIn, async (req, res) => {
     console.log(err);
     res.status(500).send("Comment couldn't be posted, sorry!!");
   }
-}); 
+});
 
 async function checkCommentOwner(req, res, next) {
   const comment = await Comment.findById(req.params.commentId);
   if (!comment) return res.status(404).send('Comment not found');
-  if (comment.user.equals(req.user._id)) return next();
+  if (comment.user.equals(req.user._id) || req.user.isAdmin) return next();
   res.status(403).send('Not authorized');
 }
 

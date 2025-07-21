@@ -26,12 +26,12 @@ router.get('/addBlog', (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params;  
+    const { id } = req.params;
     const blog = await Blog.findById(req.params.id)
-      .populate({
-        path: 'comments',
-        populate: { path: 'user', select: 'username' }
-      });
+        .populate({
+            path: 'comments',
+            populate: { path: 'user', select: 'username' }
+        });
     const userId = blog.createdBy;
     const blogUser = await User.findById(userId);
     const userName = blogUser.username;
@@ -55,12 +55,28 @@ router.post('/', isLoggedIn, async (req, res) => {
 
 });
 
+router.get('/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+    res.render('blog/edit', { blog });
+});
+
+router.patch('/:id', async (req, res) => {
+    const { id } = req.params;
+    const newBody = req.body.newBody;
+    await Blog.findByIdAndUpdate(id, { body: newBody });
+    res.redirect('/blog');
+});
 
 
 
-router.delete('/:id', async (req, res) => {
+
+router.delete('/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     await Blog.findByIdAndDelete(id);
+    if (req.user.isAdmin) {
+        return res.redirect('/admin/dashboard');
+    }
     res.redirect('/blog');
 })
 
