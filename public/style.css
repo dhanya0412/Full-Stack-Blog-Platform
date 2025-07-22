@@ -38,8 +38,20 @@ body {
   font-weight: bold;
 }
 
+.navbar-right {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+
+
+}
+
+
+
 .register-link,
 .login-link {
+  height: 80%;
+
   color: #171B36;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -57,6 +69,17 @@ body {
 #header {
   height: 100vh;
 }
+
+.filter {
+  width: 10px;
+}
+
+.theme {
+  display: flex;
+  flex-direction: column;
+  width: 10px;
+}
+
 
 
 

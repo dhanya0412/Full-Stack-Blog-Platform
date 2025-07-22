@@ -8,6 +8,7 @@
     <link href="/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
         .blog-toggle {
@@ -22,6 +23,8 @@
             flex: 1;
             display: flex;
             justify-content: center;
+            gap: 20px;
+            align-items: baseline;
         }
     </style>
 
@@ -37,30 +40,85 @@
             <div class="navbar-center">
                 <form class="d-flex" onsubmit="event.preventDefault(); filterBlogs()">
                     <input class="form-control me-2" type="search" placeholder="search blogs here" name="search"
-                        oninput="filterBlogs()" />
+                        oninput="searchBlogs()" />
 
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+
+                <div class="dropdown">
+
+                    <i class="fa-solid fa-filter dropdown-toggle " type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" data-value="All">All</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Education">Education</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Politics">Politics</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Self-Development">Self-Development</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Creative Writing">Creative Writing</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Lifestyle">Lifestyle</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Career & Growth">Career & Growth</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Travel">Travel</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Technology">Technology</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Finance">Finance</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Mental Health">Mental Health</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Environment">Environment</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Science">Science</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="History">History</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Art & Culture">Art & Culture</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Current Affairs">Current Affairs</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Book Reviews">Book Reviews</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Movie & TV Reviews">Movie & TV Reviews</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" data-value="Parenting">Parenting</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Relationships">Relationships</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Food & Recipes">Food & Recipes</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Health & Fitness">Health & Fitness</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Personal Experiences">Personal Experiences</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" data-value="Productivity">Productivity</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Coding & Development">Coding & Development</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" data-value="Startups & Entrepreneurship">Startups &
+                                Entrepreneurship</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Social Justice">Social Justice</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Digital Marketing">Digital Marketing</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Spirituality">Spirituality</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Gaming">Gaming</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Space & Galaxy">Space & Galaxy</a></li>
+                        <li><a class="dropdown-item" href="#" data-value="Other">Other</a></li>
+
+                    </ul>
+                </div>
             </div>
 
 
-            <div class="navbar-right">
-                <a onclick="showActiveClass('allBlogs')" class="register-link">ALL BLOGS</a>
-                <a onclick="showActiveClass('myBlogs')" class="register-link">MY BLOG</a>
-                <a href="/blog/addBlog" class="register-link">ADD BLOG</a>
-                <% if (user) { %>
-                    <a href="/logout" class="register-link text-danger">LOGOUT</a>
-                    <% } %>
+            <div class="navbar-right ">
+
+
+                <div>
+                    <a onclick="showActiveClass('allBlogs')" class="register-link">ALL BLOGS</a>
+                    <a onclick="showActiveClass('myBlogs')" class="register-link">MY BLOG</a>
+                    <a href="/blog/addBlog" class="register-link">ADD BLOG</a>
+                    <% if (user) { %>
+                        <a href="/logout" class="register-link text-danger">LOGOUT</a>
+                        <% } %>
+                </div>
 
             </div>
+            <nav class="navbar theme">
+
+            </nav>
         </nav>
 
-      
 
-        <div id="allBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3'>
+
+
+        <div id="allBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3' style="height:100%">
             <% allblogs.forEach(blog=>{%>
-                <div class="card" style="width: 18rem;">
-                    <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
+                <div class="card" data-theme="<%=blog.theme%>" style="width: 18rem;">
+
+                    <img src="<%= blog.coverImage %>" class="card-img-top " alt="...">
                     <div class="card-body">
                         <h5 class="card-title">
                             <%=blog.title%>
@@ -70,17 +128,20 @@
                     </div>
                 </div>
 
+
                 <%} )%>
 
 
 
         </div>
 
-        <div id="myBlogs" class='container d-none mt-3 d-flex flex-wrap gap-3'>
+        <div id="myBlogs" class='container d-none mt-3 d-flex flex-wrap gap-3' style="height:100%">
             <% myblogs.forEach(blog=> { %>
-                <div class="card" style="width: 18rem;">
+                <div class="card" data-theme="<%=blog.theme%>" style="width: 18rem;">
+
                     <img src="<%= blog.coverImage %>" class="card-img-top" alt="...">
-                    <div class="card-body">
+
+                    <div class="card-body ">
                         <h5 class="card-title">
                             <%= blog.title %>
                         </h5>
@@ -110,12 +171,10 @@
             }
         </script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
-        </script>
+
 
     <script>
-        function filterBlogs() {
+        function searchBlogs() {
             const searchTerm = document.querySelector('input[name="search"]').value.toLowerCase();
 
             const allSection = document.getElementById('allBlogs');
@@ -134,6 +193,48 @@
             });
         }
     </script>
+
+    <script>
+
+        const items = document.querySelectorAll('.dropdown-item');
+        items.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedVal = item.getAttribute('data-value');
+
+                const allSection = document.getElementById('allBlogs');
+                const mySection = document.getElementById('myBlogs');
+
+                const visibleSection = allSection.classList.contains('d-flex') ? allSection : mySection;
+                const cards = visibleSection.querySelectorAll('.card');
+
+                cards.forEach(card => {
+                    const theme = card.getAttribute('data-theme');
+                    if (selectedVal === 'All' || selectedVal === theme) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+
+
+
+
+            })
+        })
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 

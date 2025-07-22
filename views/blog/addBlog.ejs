@@ -25,11 +25,11 @@
 
             </div>
         </nav>
-        <div class="container mt-3">
+        <div class="container mt-3" style="height: 100%">
             <h1 class="mt-3 mb-3">
                 Hi <%= user.username%>! Go on write it all down!
             </h1>
-            <form action="/blog" method="POST">
+            <form action="/blog" method="POST" style="height:100%" enctype="multipart/form-data">
                 <div class="mb-3">
                     <div class="mb-3">
                         <label for="coverImage" class="form-label">Choose Cover Image</label>
@@ -40,12 +40,37 @@
                     <label for="theme" class="form-label">Theme</label>
                     <select class="form-control" id="theme" name="theme" required>
                         <option value="" disabled selected>Select a category</option>
-                        <option value="LIFESTYLE">LIFESTYLE</option>
-                        <option value="TECHNOLOGY">TECHNOLOGY</option>
-                        <option value="ACADEMICS">ACADEMICS</option>
-                        <option value="CREATION">CREATION</option>
-                        <option value="SOCIAL IMPACT">SOCIAL IMPACT</option>
-                        <option value="OTHER">OTHER</option>
+                        <option value="Education">Education</option>
+                        <option value="Politics">Politics</option>
+                        <option value="Self-Development">Self-Development</option>
+                        <option value="Creative Writing">Creative Writing</option>
+                        <option value="Career & Growth">Career & Growth</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Mental Health">Mental Health</option>
+                        <option value="Environment">Environment</option>
+                        <option value="Science">Science</option>
+                        <option value="History">History</option>
+                        <option value="Art & Culture">Art & Culture</option>
+                        <option value="Current Affairs">Current Affairs</option>
+                        <option value="Book Reviews">Book Reviews</option>
+                        <option value="Movie & TV Reviews">Movie & TV Reviews</option>
+                        <option value="Parenting">Parenting</option>
+                        <option value="Relationships">Relationships</option>
+                        <option value="Food & Recipes">Food & Recipes</option>
+                        <option value="Health & Fitness">Health & Fitness</option>
+                        <option value="Personal Experiences">Personal Experiences</option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Coding & Development">Coding & Development</option>
+                        <option value="Startups & Entrepreneurship">Startups & Entrepreneurship</option>
+                        <option value="Social Justice">Social Justice</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
+                        <option value="Spirituality">Spirituality</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Space & Galaxy">Space & Galaxy</option>
+                        <option value="Other">Other</option>
+
                     </select>
 
 
@@ -74,4 +99,3 @@
 </body>
 
 </html>
-

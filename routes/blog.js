@@ -3,6 +3,8 @@ const Blog = require('../models/blog.js');
 const User = require('../models/user.js');
 const router = express.Router();
 const isLoggedIn = require('../middlewares/isLoggedIn.js');
+const upload = require('../middlewares/upload.js');
+const multer = require('multer');
 
 router.get('/', async (req, res) => {
     const myBlogs = await Blog.find({ createdBy: req.user._id }).sort({ "createdAt": -1 });
@@ -46,12 +48,13 @@ router.get('/:id', async (req, res) => {
     });
 })
 
-router.post('/', isLoggedIn, async (req, res) => {
+router.post('/', isLoggedIn, upload.single('coverImage'), async (req, res) => {
+    const imagePath = '/uploads/' + req.file.filename;
 
 
 
-    const { title, theme, coverImage, body } = req.body;
-    await Blog.create({ title, theme, coverImage, body, createdBy: req.user.id })
+    const { title, theme, body } = req.body;
+    await Blog.create({ title, theme, coverImage: imagePath, body, createdBy: req.user.id })
     res.redirect('/blog');
 
 });
@@ -94,7 +97,7 @@ router.get('/theme/:category', isLoggedIn, async (req, res) => {
         user: req.user,
         allblogs: allBlogs,
         myblogs: myBlogs,
-       theme: category 
+        theme: category
     });
 });
 
