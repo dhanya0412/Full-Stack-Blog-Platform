@@ -38,7 +38,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="theme" class="form-label">Theme</label>
-                    <input type="text" class="form-control" id="theme" aria-describedby="theme" name="theme">
+                    <select class="form-control" id="theme" name="theme" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="LIFESTYLE">LIFESTYLE</option>
+                        <option value="TECHNOLOGY">TECHNOLOGY</option>
+                        <option value="ACADEMICS">ACADEMICS</option>
+                        <option value="CREATION">CREATION</option>
+                        <option value="SOCIAL IMPACT">SOCIAL IMPACT</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+
 
                 </div>
                 <div class="mb-3">
@@ -65,3 +74,4 @@
 </body>
 
 </html>
+

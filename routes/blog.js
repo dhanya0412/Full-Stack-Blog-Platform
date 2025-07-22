@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
             user: req.user,
             myblogs: myBlogs,
             allblogs: allBlogs,
+            theme: null
         }
     );
 
@@ -73,12 +74,29 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
-    await Blog.findByIdAndDelete(id);
+    const blog = await Blog.findByIdAndDelete(id);
+    if (blog) {
+        const Comment = require('../models/comment');
+        await Comment.deleteMany({ _id: { $in: blog.comments } });
+    }
     if (req.user.isAdmin) {
         return res.redirect('/admin/dashboard');
     }
     res.redirect('/blog');
-})
+});
+
+router.get('/theme/:category', isLoggedIn, async (req, res) => {
+    const category = req.params.category;
+    const allBlogs = await Blog.find({ theme: category }).sort({ createdAt: -1 });
+    const myBlogs = await Blog.find({ createdBy: req.user._id, theme: category }).sort({ createdAt: -1 });
+
+    res.render('blog/index.ejs', {
+        user: req.user,
+        allblogs: allBlogs,
+        myblogs: myBlogs,
+       theme: category 
+    });
+});
 
 
 module.exports = router;

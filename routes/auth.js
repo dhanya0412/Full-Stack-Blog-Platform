@@ -36,7 +36,7 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', {
 
   failureRedirect: '/login',
-  failureFlash: true // If using connect-flash
+  failureFlash: true 
 }), (req, res) => {
   if (req.user.isAdmin) {
     return res.redirect('/admin/dashboard');
@@ -47,9 +47,10 @@ router.post('/login', passport.authenticate('local', {
 
 
 router.get('/logout', (req, res, next) => {
+    console.log("LOGGING OUT");
   req.logout(function (err) {
     if (err) { return next(err); }
-    res.redirect('/auth/login');
+    res.redirect('/login');
   });
 });
 

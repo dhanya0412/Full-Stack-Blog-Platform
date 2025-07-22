@@ -8,4 +8,11 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
 }
 
-module.exports = isLoggedIn;
+module.exports = (req, res, next) => {
+  if (!req.isAuthenticated || !req.isAuthenticated()) {
+    req.session.returnTo = req.originalUrl; 
+    return res.redirect('/login');
+  }
+  next();
+};
+
