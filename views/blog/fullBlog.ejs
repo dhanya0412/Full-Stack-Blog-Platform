@@ -26,6 +26,7 @@
       padding: 0.8rem 1.5rem;
       height: 10%;
     }
+    
   </style>
 </head>
 
@@ -54,13 +55,16 @@
 
 
     <pre>
-            <%= blog.body %>
-    </pre>
+           <%- blog.body %>
 
-    <h2>Comments</h2>
-    <ul>
+    </pre>
+<div class="comment-section">
+  <h2>Comments</h2>
+  <ul style="padding-left: 0;">
+
       <% blog.comments.forEach(comment=> { %>
-        <li>
+      <li class="comment">
+
           <strong>
             <%= comment.user.username %>:
           </strong>
@@ -92,21 +96,32 @@
         <% }) %>
     </ul>
 
-    <% if (user) { %>
-      <form action="/blog/<%= blog._id %>/comments" method="POST">
-        <textarea name="content" placeholder="Write a comment..." required></textarea>
-        <button type="submit">Add Comment</button>
+   <% if (user) { %>
+  <div class="mt-4">
+  <!-- Comment Form -->
+  <form action="/blog/<%= blog._id %>/comments" method="POST" class="add-comment">
+    <textarea name="content" placeholder="Write a comment..." required class="form-control mb-2" rows="5"></textarea>
+    
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">Add Comment</button>
+    </div>
+  </form>
+
+  <!-- Delete Blog Form (separate, same line visually) -->
+  <% if (blog.createdBy.toString() === user._id.toString() || user.isAdmin) { %>
+    <div class="d-flex justify-content-end mt-2">
+      <form id="delete-blog-form" action="/blog/<%= blog._id %>?_method=DELETE" method="POST">
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Blog</button>
       </form>
-      <% } else { %>
-        <p><a href="/login">Login</a> to comment.</p>
-        <% } %>
+    </div>
+  <% } %>
+</div>
+
+<% } else { %>
+  <p><a href="/login">Login</a> to comment.</p>
+<% } %>
 
 
-          <% if (user && blog.createdBy.toString()===user._id.toString() || user.isAdmin) { %>
-            <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button type="submit" class="btn btn-danger">Delete Blog</button>
-            </form>
-            <% } %>
 
   </div>
 
@@ -130,6 +145,11 @@
       form.style.display = 'none';
       content.style.display = 'inline';
     }
+      function confirmDelete() {
+    if (confirm("Are you sure you want to delete this blog? This action cannot be undone.")) {
+      document.getElementById("delete-blog-form").submit();
+    }
+  }
   </script>
 
 </body>

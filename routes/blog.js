@@ -66,11 +66,18 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params;
-    const newBody = req.body.newBody;
-    await Blog.findByIdAndUpdate(id, { body: newBody });
-    res.redirect('/blog');
+    const { id } = req.params;
+    const { title, theme, body } = req.body;
+
+    await Blog.findByIdAndUpdate(id, {
+        title,
+        theme,
+        body
+    });
+
+    res.redirect('/blog');
 });
+
 
 
 

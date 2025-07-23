@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
     <style>
         .navbar {
             display: flex;
@@ -36,18 +39,58 @@
     </nav>
 
 
-    <form action="/blog/<%=blog._id%>?_method=PATCH" method="POST">
+    <form class="blog-form" action="/blog/<%=blog._id%>?_method=PATCH" method="POST">
         <div class="form-floating">
-            <textarea class="form-control mt-3" name="newBody" id="newBody"
-                style="height: 100vh; width: 80%; margin-left:10%; margin-right:10%"><%= blog.body%></textarea>
-            <label for="newBody"></label>
+            <div id="quill-editor" style="height: 300px;"></div>
+            <input type="hidden" name="body" id="quill-hidden">
         </div>
         <button type="submit" class="btn btn-primary mt-3" style="margin-left:10%; margin-right:10%">Submit</button>
+        <% if (typeof blog !== 'undefined') { %>
+  <div id="blog-content" style="display: none;"><%- blog.body %></div>
+<% } %>
+
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+    <script>
+        const textarea = document.querySelector("form.blog-form textarea");
+        if (textarea) {
+            textarea.addEventListener('input', () => {
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            });
+        }
+    </script>
+    
+    <script>
+  const quill = new Quill('#quill-editor', {
+    theme: 'snow',
+    placeholder: 'Write your blog...',
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link', 'image'],
+        ['clean']
+      ]
+    }
+  });
+
+  // Set Quill HTML on submit
+  document.querySelector('form.blog-form').addEventListener('submit', function () {
+    document.getElementById('quill-hidden').value = quill.root.innerHTML;
+  });
+
+  // Pre-fill in edit mode
+  const contentDiv = document.getElementById("blog-content");
+  if (contentDiv) {
+    quill.root.innerHTML = contentDiv.innerHTML.trim();
+  }
+</script>
+
 </body>
 
 </html>

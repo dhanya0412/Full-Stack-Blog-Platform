@@ -339,3 +339,261 @@ div form button {
   align-self: center;
 
 }
+
+.card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 6px 20px rgba(46,60,110,0.13);
+    transition: all 0.2s;
+}
+
+.card {
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(30,40,90,.07);
+    overflow: hidden;
+    width: 18rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.25rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 1.18rem;
+    color: #21243d;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.card .btn {
+    border-radius: 5px;
+    font-size: 0.98rem;
+    min-width: 0;
+}
+
+.card .btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.card .btn-primary:hover {
+    background: #173c73;
+    border-color: #173c73;
+}
+
+.card .btn-success {
+    background: #41b580;
+    border-color: #41b580;
+}
+
+.card .btn-success:hover {
+    background: #2e8b5a;
+    border-color: #2e8b5a;
+}
+
+.card .btn-danger {
+    background: #ef4444;
+    border-color: #ef4444;
+}
+
+.card .btn-danger:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+.container.d-flex.flex-wrap {
+    gap: 2rem;
+    justify-content: flex-start;
+}
+
+
+
+.container-fluid {
+  padding: 2rem;
+  background-color: white;
+  max-width: 800px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.container-fluid img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.container-fluid h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #171B36;
+}
+
+.container-fluid h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.container-fluid pre {
+  background-color: #F4F5FA;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+form.blog-form {
+  max-width: 900px;     
+  width: 95%;
+  margin: 50px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+
+form.blog-form input,
+form.blog-form textarea,
+form.blog-form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+form.blog-form textarea {
+  resize: vertical; 
+  min-height: 150px;
+}
+
+
+form.blog-form button {
+  background-color: #171B36;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+form.blog-form button:hover {
+  background-color: #0C0E1B;
+}
+
+.comment-section {
+  margin-top: 40px;
+}
+
+.comment-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0C0E1B;
+}
+
+
+.comment {
+  background-color: #f9f9f9;
+  border-left: 4px solid #0C0E1B;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  position: relative;
+}
+
+.comment strong {
+  color: #171B36;
+  font-size: 1.1rem;
+}
+
+
+.comment small {
+  font-size: 0.85rem;
+  color: #666;
+  margin-left: 8px;
+}
+
+.comment button {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.comment button:hover {
+  opacity: 0.9;
+}
+
+.comment form {
+  margin-top: 10px;
+}
+
+textarea[name="content"] {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.add-comment {
+  margin-top: 2rem;
+}
+
+.add-comment textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.add-comment button {
+  background-color: #0C0E1B;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-comment button:hover {
+  background-color: #171B36;
+}
+
+#quill-editor {
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
