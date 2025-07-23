@@ -32,13 +32,13 @@
 
 <body>
     <div id="header">
-        <nav class="navbar">
+        <nav class="navbar" style="position: relative;">
             <div class="navbar-left">
                 <a href="/">MyBlog</a>
             </div>
 
             <div class="navbar-center">
-                <form class="d-flex" onsubmit="event.preventDefault(); filterBlogs()">
+                <form onsubmit="event.preventDefault(); filterBlogs()">
                     <input class="form-control me-2" type="search" placeholder="search blogs here" name="search"
                         oninput="searchBlogs()" />
 
@@ -97,26 +97,47 @@
 
 
                 <div>
-                    <a onclick="showActiveClass('allBlogs')" class="register-link">ALL BLOGS</a>
-                    <a onclick="showActiveClass('myBlogs')" class="register-link">MY BLOG</a>
-                    <a href="/blog/addBlog" class="register-link">ADD BLOG</a>
+
+                    <a onclick="showActiveClass('allBlogs')" class="register-link mainPage">ALL BLOGS</a>
+                    <a onclick="showActiveClass('myBlogs')" class="register-link mainPage">MY BLOG</a>
+                    <a href="/blog/addBlog" class="register-link mainPage">ADD BLOG</a>
                     <% if (user) { %>
-                        <a href="/logout" class="register-link text-danger">LOGOUT</a>
+                        <a href="/logout" class="register-link text-danger mainPage">LOGOUT</a>
                         <% } %>
+
+                            <i id="bars" class="fa-solid fa-bars" onClick="showSidebar()"></i>
                 </div>
 
+
             </div>
-            <nav class="navbar theme">
 
-            </nav>
+
         </nav>
+        <div class="buttons" style="display: none;">
+            <i class="fa-solid fa-xmark" onClick="closeSidebar()"></i>
+            <form class="d-flex" onsubmit="event.preventDefault(); filterBlogs()">
+                <input class="form-control me-2" type="search" placeholder="search blogs here" name="search"
+                    oninput="searchBlogs()" />
+
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <a onclick="showActiveClass('allBlogs')" class="coll-links">ALL BLOGS</a>
+            <a onclick="showActiveClass('myBlogs')" class="coll-links">MY BLOG</a>
+            <a href="/blog/addBlog" class="coll-links">ADD BLOG</a>
+            <% if (user) { %>
+                <a href="/logout" class="coll-links text-danger">LOGOUT</a>
+                <% } %>
+
+
+
+        </div>
 
 
 
 
-        <div id="allBlogs" class='container d-flex active mt-3 d-flex flex-wrap gap-3' style="height:100%">
+        <div id="allBlogs" class='Container d-flex active mt-3 d-flex flex-wrap ' style="height:100%; width:100%">
             <% allblogs.forEach(blog=>{%>
-                <div class="card" data-theme="<%=blog.theme%>" style="width: 18rem;">
+                <div class="card m-2" data-theme="<%=blog.theme%>" style="width: 18rem; height: 22rem">
 
                     <img src="<%= blog.coverImage %>" class="card-img-top " alt="...">
                     <div class="card-body">
@@ -135,23 +156,27 @@
 
         </div>
 
-        <div id="myBlogs" class="container d-none mt-3 d-flex flex-wrap gap-4 justify-content-start" style="height:100%">
+        <div id="myBlogs" class="Container d-none mt-3 d-flex flex-wrap  justify-content-start"
+            style="height:100%; width:100%">
             <% myblogs.forEach(blog=> { %>
-               <div class="card" data-theme="<%= blog.theme %>">
-  <img src="<%= blog.coverImage %>" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><%= blog.title %></h5>
-    <div class="d-flex gap-2">
-      <a href="/blog/<%= blog._id %>" class="btn btn-primary flex-fill">VIEW</a>
-      <% if (typeof myblogs !== 'undefined') { %>
-        <a href="/blog/<%= blog._id %>/edit" class="btn btn-success flex-fill">EDIT</a>
-        <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" class="flex-fill" style="margin:0;">
-          <button type="submit" class="btn btn-danger w-100">DELETE</button>
-        </form>
-      <% } %>
-    </div>
-  </div>
-</div>
+                <div class="card m-2" data-theme="<%= blog.theme %>" style="width: 18rem; height: 22rem">
+                    <img src="<%= blog.coverImage %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= blog.title %>
+                        </h5>
+                        <div class="d-flex gap-2">
+                            <a href="/blog/<%= blog._id %>" class="btn btn-primary flex-fill">VIEW</a>
+                            <% if (typeof myblogs !=='undefined' ) { %>
+                                <a href="/blog/<%= blog._id %>/edit" class="btn btn-success flex-fill">EDIT</a>
+                                <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" class="flex-fill"
+                                    style="margin:0;">
+                                    <button type="submit" class="btn btn-danger w-100">DELETE</button>
+                                </form>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
 
 
                 <% }) %>
@@ -159,7 +184,7 @@
 
         <script>
             function showActiveClass(id) {
-                document.querySelectorAll('.container').forEach(section => {
+                document.querySelectorAll('.Container').forEach(section => {
 
                     if (section.classList.contains('d-flex')) {
                         section.classList.remove('d-flex');
@@ -226,6 +251,19 @@
             })
         })
 
+    </script>
+    <script>
+        function showSidebar() {
+            const sidebar = document.querySelector('.buttons');
+            sidebar.style.display = 'flex';
+
+        }
+
+        function closeSidebar() {
+            const sidebar = document.querySelector('.buttons');
+            sidebar.style.display = 'none';
+
+        }
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
