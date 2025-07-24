@@ -118,8 +118,9 @@ cd <repo-name>
 DB_URL=mongodb+srv://<username>:<password>@<cluster-address>/<database-name>?retryWrites=true&w=majority&appName=<appName>
 
 ```
-Replace username, password, cluster-address and database-name with your actual MongoDB Atlas credentials. <\br>
-This .env file is ignored via .gitignore, so your credentials are never exposed publicly.
+Replace username, password, cluster-address and database-name with your actual MongoDB Atlas credentials. <br>
+This .env file is ignored via .gitignore, so your credentials are never exposed publicly. <br>
+For this project, we used MongoDB Atlas, so that the databases are synced when any updates are made.
 
 <h2>MongoDB Setup Options</h2> 
 
