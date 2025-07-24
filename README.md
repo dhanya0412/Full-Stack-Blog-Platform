@@ -158,7 +158,7 @@ By default, users are stored with a regular role (user). To make someone an admi
 ```
 
 
-<h2>CONTRIBUTERS- DHANYA GIRDHAR & RAASHI SHARMA</h2>
+CONTRIBUTERS- DHANYA GIRDHAR & RAASHI SHARMA :heart:
 
 
 
