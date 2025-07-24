@@ -108,9 +108,10 @@ cd <repo-name>
 ```
 2. Create a .env file in your project root
 ```
-DB_URL=mongodb+srv://<username>:<password>@cluster0.3dlvg3q.mongodb.net/<database-name>?retryWrites=true&w=majority&appName=Cluster0
+DB_URL=mongodb+srv://<username>:<password>@<cluster-address>/<database-name>?retryWrites=true&w=majority&appName=<appName>
+
 ```
-Replace <username>, <password>, and <database-name> with your actual MongoDB Atlas credentials.
+Replace username, password, cluster-address and database-name with your actual MongoDB Atlas credentials.
 
 3. Install Dependencies
 ```bash
