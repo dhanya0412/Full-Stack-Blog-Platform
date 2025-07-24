@@ -188,48 +188,10 @@ main p {
   text-align: center;
 }
 
-.appear1 {
-  animation: appear1 4s ease-in;
-  animation-range: entry 0% cover 30%;
-
-}
-
-.appear2 {
-  animation: appear2 4s ease-in;
-  animation-range: entry 0% cover 30%;
-
-}
 
 
-@keyframes appear1 {
-  0% {
-    opacity: 0%;
-    transform: translateX(-100px);
 
-  }
 
-  100% {
-    opacity: 100%;
-    transform: translateX(0);
-
-  }
-
-}
-
-@keyframes appear2 {
-  0% {
-    opacity: 0%;
-    transform: translateX(100px);
-
-  }
-
-  100% {
-    opacity: 100%;
-    transform: translateX(0);
-
-  }
-
-}
 
 .why:nth-of-type(2n+1) {
   background-color: #171B36;
@@ -240,8 +202,17 @@ main p {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+
+
 }
+
+.why:nth-of-type(1) h1 {
+  text-align: center;
+  text-wrap: wrap;
+  white-space: nowrap;
+}
+
+
 
 
 
@@ -283,24 +254,7 @@ main p {
 
 }
 
-.posts,
-#register-now {
-  animation: bottomUp 4s ease-in
-}
 
-
-
-
-@keyframes bottomUp {
-  0% {
-    transform: translateY(80px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-
-}
 
 .posts img {
   object-fit: cover;
@@ -372,7 +326,7 @@ button a:hover {
   height: 100%;
 }
 
-@media screen and (max-width:830px) {
+@media screen and (max-width:1024px) {
   .why {
     font-size: 1.5em;
 
@@ -385,7 +339,7 @@ button a:hover {
   }
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 589px) {
   .why {
     font-size: 1.2em;
 
@@ -405,9 +359,11 @@ button a:hover {
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   .why {
     font-size: 1em;
+    padding-right: 50px;
+    padding-left: 50px;
 
   }
 

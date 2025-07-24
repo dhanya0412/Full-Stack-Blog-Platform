@@ -26,7 +26,6 @@
       padding: 0.8rem 1.5rem;
       height: 10%;
     }
-    
   </style>
 </head>
 
@@ -55,102 +54,82 @@
 
 
     <pre>
-           <%- blog.body %>
+      <%- blog.body %>
 
     </pre>
-<div class="comment-section">
-  <h2>Comments</h2>
-  <ul style="padding-left: 0;">
+    <div class="comment-section">
+      <h2>Comments</h2>
+      <ul style="padding-left: 0;">
 
-      <% blog.comments.forEach(comment=> { %>
-      <li class="comment">
+        <% blog.comments.forEach(comment=> { %>
+          <li class="comment">
 
-          <strong>
-            <%= comment.user.username %>:
-          </strong>
-          <span id="content-<%= comment._id %>">
-            <%= comment.content %>
-          </span>
-          <small>(<%= comment.datePosted.toDateString() %>)</small>
+            <strong>
+              <%= comment.user.username %>:
+            </strong>
+            <span id="content-<%= comment._id %>">
+              <%= comment.content %>
+            </span>
+            <small>(<%= comment.datePosted.toDateString() %>)</small>
 
-          <% if (user && (comment.user._id.toString()===user._id.toString() || user.isAdmin)) { %>
+            <% if (user && (comment.user._id.toString()===user._id.toString() || user.isAdmin)) { %>
 
 
-            <form action="/blog/<%= blog._id %>/comments/<%= comment._id %>/delete" method="POST"
-              style="display:inline;">
-              <button type="submit">Delete</button>
-            </form>
+              <form action="/blog/<%= blog._id %>/comments/<%= comment._id %>/delete" method="POST"
+                style="display:inline;">
+                <button type="submit">Delete</button>
+              </form>
+              <% } %>
+
+                <% if (user && comment.user._id.toString()===user._id.toString() && !user.isAdmin) { %>
+                  <button onclick="toggleEdit('<%= comment._id %>')">Edit</button>
+                  <form id="edit-form-<%= comment._id %>" action="/blog/<%= blog._id %>/comments/<%= comment._id %>"
+                    method="POST" style="display:none;">
+                    <textarea name="content" required><%= comment.content %></textarea>
+                    <button type="submit">Update</button>
+                    <button type="button" onclick="cancelEdit('<%= comment._id %>')">Cancel</button>
+                  </form>
+                  <% } %>
+
+          </li>
+          <% }) %>
+      </ul>
+
+      <% if (user) { %>
+        <div class="mt-4">
+          <!-- Comment Form -->
+          <form action="/blog/<%= blog._id %>/comments" method="POST" class="add-comment">
+            <textarea name="content" placeholder="Write a comment..." required class="form-control mb-2"
+              rows="5"></textarea>
+
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">Add Comment</button>
+            </div>
+          </form>
+
+          <!-- Delete Blog Form (separate, same line visually) -->
+          <% if (blog.createdBy.toString()===user._id.toString() || user.isAdmin) { %>
+            <div class="d-flex justify-content-end mt-2">
+              <form id="delete-blog-form" action="/blog/<%= blog._id %>?_method=DELETE" method="POST">
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Blog</button>
+              </form>
+            </div>
             <% } %>
+        </div>
 
-              <% if (user && comment.user._id.toString()===user._id.toString() && !user.isAdmin) { %>
-                <button onclick="toggleEdit('<%= comment._id %>')">Edit</button>
-                <form id="edit-form-<%= comment._id %>" action="/blog/<%= blog._id %>/comments/<%= comment._id %>"
-                  method="POST" style="display:none;">
-                  <textarea name="content" required><%= comment.content %></textarea>
-                  <button type="submit">Update</button>
-                  <button type="button" onclick="cancelEdit('<%= comment._id %>')">Cancel</button>
-                </form>
-                <% } %>
+        <% } else { %>
+          <p><a href="/login">Login</a> to comment.</p>
+          <% } %>
 
-        </li>
-        <% }) %>
-    </ul>
 
-   <% if (user) { %>
-  <div class="mt-4">
-  <!-- Comment Form -->
-  <form action="/blog/<%= blog._id %>/comments" method="POST" class="add-comment">
-    <textarea name="content" placeholder="Write a comment..." required class="form-control mb-2" rows="5"></textarea>
-    
-    <div class="d-flex justify-content-between">
-      <button type="submit" class="btn btn-primary">Add Comment</button>
+
     </div>
-  </form>
-
-  <!-- Delete Blog Form (separate, same line visually) -->
-  <% if (blog.createdBy.toString() === user._id.toString() || user.isAdmin) { %>
-    <div class="d-flex justify-content-end mt-2">
-      <form id="delete-blog-form" action="/blog/<%= blog._id %>?_method=DELETE" method="POST">
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Blog</button>
-      </form>
-    </div>
-  <% } %>
-</div>
-
-<% } else { %>
-  <p><a href="/login">Login</a> to comment.</p>
-<% } %>
 
 
-
-  </div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-    crossorigin="anonymous"></script>
-  <script>
-    function toggleEdit(commentId) {
-      const form = document.getElementById(`edit-form-${commentId}`);
-      const content = document.getElementById(`content-${commentId}`);
-
-      form.style.display = 'block';
-      content.style.display = 'none';
-    }
-
-    function cancelEdit(commentId) {
-      const form = document.getElementById(`edit-form-${commentId}`);
-      const content = document.getElementById(`content-${commentId}`);
-
-      form.style.display = 'none';
-      content.style.display = 'inline';
-    }
-      function confirmDelete() {
-    if (confirm("Are you sure you want to delete this blog? This action cannot be undone.")) {
-      document.getElementById("delete-blog-form").submit();
-    }
-  }
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"></script>
+    <script src="/js/fullBlog.js"></script>
 
 </body>
 
