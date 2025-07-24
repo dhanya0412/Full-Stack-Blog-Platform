@@ -106,6 +106,12 @@ Follow the steps below to run the project locally:
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
 ```
+2. Create a .env file in your project root
+```
+DB_URL=mongodb+srv://<username>:<password>@cluster0.3dlvg3q.mongodb.net/<database-name>?retryWrites=true&w=majority&appName=Cluster0
+```
+Replace <username>, <password>, and <database-name> with your actual MongoDB Atlas credentials.
+
 3. Install Dependencies
 ```bash
 npm install
@@ -125,6 +131,30 @@ node app.js
 <img width="1874" height="891" alt="image" src="https://github.com/user-attachments/assets/4932d6df-8538-4e74-a4f7-88472fca863e" />
 <h3>User Dashboard</h3>
 <img width="1755" height="848" alt="image" src="https://github.com/user-attachments/assets/c3aa279a-5866-4a0b-a46e-fe5aee40c806" />
+
+
+<h2>Admin Role Assignment (Backend)</h2>
+By default, users are stored with a regular role (user). To make someone an admin:
+
+<h3>Update via MongoDB Atlas</h3>
+
+1.Go to your MongoDB Atlas dashboard.
+
+2. Navigate to your users collection.
+
+3. Find the user you want to make admin.
+
+4. Modify their document like this:
+
+```
+{
+  "_id": "someid",
+  "username": "john",
+  "password": "somePassword",
+  "isAdmin": "true"
+}
+
+```
 
 
 
