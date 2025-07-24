@@ -30,7 +30,7 @@ router.get('/addBlog', (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    const blog = await Blog.findById(req.params.id)
+    const blog = await Blog.findById(id)
         .populate({
             path: 'comments',
             populate: { path: 'user', select: 'username' }
@@ -39,14 +39,20 @@ router.get('/:id', async (req, res) => {
     const blogUser = await User.findById(userId);
     const userName = blogUser.username;
 
-    console.log(userName);
+    // New logic to determine back URL
+    let backUrl = '/blog';
+    if (req.query.admin === 'true' && req.query.userId) {
+        backUrl = `/admin/viewBlogs/${req.query.userId}`;
+    }
 
     res.render('blog/fullBlog', {
         user: req.user,
         blog: blog,
-        userName
+        userName,
+        backUrl // pass this to template
     });
-})
+});
+
 
 router.post('/', isLoggedIn, upload.single('coverImage'), async (req, res) => {
     const imagePath = '/uploads/' + req.file.filename;

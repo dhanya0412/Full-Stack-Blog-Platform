@@ -32,7 +32,7 @@
             <a href="/logout" class="login-link">LOGOUT</a>
         </div>
     </nav>
-    <div class="container-fluid m-3">
+    <div class='Container d-flex active mt-3 d-flex flex-wrap ' style="height:100%; width:100%">
         <% userBlogs.forEach(blog=>{%>
             <div class="card" style="width: 18rem;">
                 <img src="<%=blog.coverImage%>" class="card-img-top" alt="...">
@@ -41,7 +41,8 @@
                         <%=blog.title%>
                     </h5>
 
-                    <a href="/blog/<%=blog._id%>" class="btn btn-primary">VIEW</a>
+                    <a href="/blog/<%= blog._id %>?admin=true&userId=<%= blog.createdBy %>" class="btn btn-primary">VIEW</a>
+
                 </div>
             </div>
 
