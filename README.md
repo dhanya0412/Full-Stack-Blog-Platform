@@ -126,6 +126,7 @@ This .env file is ignored via .gitignore, so your credentials are never exposed 
 You can choose how to run MongoDB for your project:
 
 <h3>Option 1: MongoDB Atlas (Cloud-hosted)</h3>
+
 > Recommended for teams or deployment
 
 #### Steps:
@@ -173,6 +174,8 @@ node app.js
 ## Website Screenshots
 ### Home Page
 <img width="1874" height="891" alt="image" src="https://github.com/user-attachments/assets/4932d6df-8538-4e74-a4f7-88472fca863e" />
+
+
 ### User Dashboard
 <img width="1755" height="848" alt="image" src="https://github.com/user-attachments/assets/c3aa279a-5866-4a0b-a46e-fe5aee40c806" />
 
