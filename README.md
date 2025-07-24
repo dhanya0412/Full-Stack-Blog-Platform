@@ -108,51 +108,86 @@
 ##  Getting Started
 Follow the steps below to run the project locally:
 
-1. Clone the Repository
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
 ```
-2. Create a .env file in your project root
+### 2. Create a .env file in your project root
 ```
 DB_URL=mongodb+srv://<username>:<password>@<cluster-address>/<database-name>?retryWrites=true&w=majority&appName=<appName>
 
 ```
-Replace username, password, cluster-address and database-name with your actual MongoDB Atlas credentials.
+Replace username, password, cluster-address and database-name with your actual MongoDB Atlas credentials. <\br>
+This .env file is ignored via .gitignore, so your credentials are never exposed publicly.
 
-3. Install Dependencies
+<h2>MongoDB Setup Options</h2> 
+
+You can choose how to run MongoDB for your project:
+
+<h3>Option 1: MongoDB Atlas (Cloud-hosted)</h3>
+> Recommended for teams or deployment
+
+#### Steps:
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+2. Create a free cluster
+3. Whitelist your IP address and create a database user
+4. Copy the connection string from **Connect > Drivers**
+5. Paste the URL as DB_URL in your `.env` file
+
+This allows you and your collaborators to share the same cloud database easily.
+
+---
+
+<h3> Option 2: Local MongoDB (Offline) </h3>
+
+> Ideal for solo/local development
+
+#### Steps:
+1. [Install MongoDB Community Edition](https://www.mongodb.com/try/download/community)
+2. Start your local MongoDB server:
+3. In your `.env`, set:
+   ```
+   DB_URL=mongodb://127.0.0.1:27017/blogify
+   ```
+This will create and use a local database named `blogify`.
+
+---
+
+
+### 3. Install Dependencies
 ```bash
 npm install
 ```
-4. Run The Server
+### 4. Run The Server
+Once MongoDB is set up (Atlas or Local), start your server:
 ```bash
 node app.js
 ```
 
-5. View In Browser
+### 5. View In Browser
 ```bash
  http://localhost:3000
 ``` 
     
-<h2>Website Screenshots</h2>
-<h3>Home Page</h3>
+## Website Screenshots
+### Home Page
 <img width="1874" height="891" alt="image" src="https://github.com/user-attachments/assets/4932d6df-8538-4e74-a4f7-88472fca863e" />
-<h3>User Dashboard</h3>
+### User Dashboard
 <img width="1755" height="848" alt="image" src="https://github.com/user-attachments/assets/c3aa279a-5866-4a0b-a46e-fe5aee40c806" />
 
 
-<h2>Admin Role Assignment (Backend)</h2>
-By default, users are stored with a regular role (user). To make someone an admin:
+## Admin Role Assignment
 
-<h3>Update via MongoDB Atlas</h3>
+By default, all users are regular users.
 
-1.Go to your MongoDB Atlas dashboard.
+To assign admin rights:
 
-2. Navigate to your users collection.
+### Using MongoDB Atlas or MongoDB Compass:
 
-3. Find the user you want to make admin.
-
-4. Modify their document like this:
+1. Go to your `users` collection
+2. Locate the user’s document
+3. Add or update the field `isAdmin` as shown below:
 
 ```
 {
@@ -163,9 +198,16 @@ By default, users are stored with a regular role (user). To make someone an admi
 }
 
 ```
+This user will now have access to:
+- Admin Dashboard
+- Manage all users
+- Moderate or delete blogs and comments
 
+---
+## Contributors
 
-CONTRIBUTERS- DHANYA GIRDHAR & RAASHI SHARMA :heart:
+- **Dhanya Girdhar**  
+- **Raashi Sharma**
 
 
 
