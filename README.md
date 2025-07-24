@@ -94,8 +94,8 @@ This is a full-stack blog application built using Node.js, Express, EJS, and Mon
     │   ├───addBlog.ejs
     │   ├───edit.ejs
     │   ├───fullBlog.ejs
-    │   └───index.ejs 
-    └───index.ejs
+    │   └───index.ejs
+    └───app.js
 ```
 
 <h2>Getting Started</h2>
